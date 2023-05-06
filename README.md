@@ -1,1 +1,1 @@
-<link href="https://tonalmeida.github.io/Slider/">clique aqui<link/>
+<a href="https://tonalmeida.github.io/Slider/">clique aqui<a/>
