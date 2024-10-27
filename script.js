@@ -8,13 +8,21 @@ const sliderContainer = document.getElementById(`slider-container`),
 let current = 1;
 
 //set initial position
-sliderContainer.style.tranform = `translateX(-${current * 100}vw)`;
+start();
 
 //events
 next.addEventListener(`click`, nextSlide);
 previous.addEventListener(`click`, previousSlide);
 
 //functions
+function start() {
+  sliderContainer.style.tranform = `translateX(-${current * 100}vw)`;
+  console.log(`adding new sliders`);
+  const first = sliderContainer.firstElementChild.cloneNode(true);
+  const last = sliderContainer.lastElementChild.cloneNode(true);
+  sliderContainer.insertBefore(last, sliderContainer.firstChild);
+  sliderContainer.appendChild(first);
+}
 function nextSlide() {
   if (current === sliders().length - 2) {
     retrunFirst();
