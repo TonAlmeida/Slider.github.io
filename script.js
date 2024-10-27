@@ -1,39 +1,56 @@
+//variables
 const sliderContainer = document.getElementById(`slider-container`),
   next = document.getElementById(`next`),
   previous = document.getElementById(`previus`),
-  sliders = sliderContainer.querySelectorAll(".larger-slider");
-let current = 0;
+  sliders = () => sliderContainer.querySelectorAll(".larger-slider"),
+  first = sliderContainer.firstChild,
+  last = sliderContainer.lastChild;
+let current = 1;
 
+//set initial position
+sliderContainer.style.tranform = `translateX(-${current * 100}vw)`;
+
+//events
 next.addEventListener(`click`, nextSlide);
 previous.addEventListener(`click`, previousSlide);
 
+//functions
 function nextSlide() {
-  if (current === sliders.length - 1) {
-    console.log(`into if condition of end`);
-    current = -1;
-    sliderContainer.style.transition = `none`;
-    sliderContainer.style.transform = `translateX(0)`;
-    setTimeout(() => {
-      sliderContainer.style.transition = `transform 0.5s ease-in-out`;
-    }, 10);
+  if (current === sliders().length - 2) {
+    retrunFirst();
   }
-  console.log(`next`, current, sliders.length);
   current++;
   sliderContainer.style.transform = `translateX(-${current * 100}vw)`;
 }
 
 function previousSlide() {
-  if (current === 0) {
-    current = sliders.length;
-    sliderContainer.style.transition = `none`;
-    sliderContainer.style.transform = `translateX(-${current * 100}vw)`;
-    setTimeout(() => {
-      sliderContainer.style.transition = `transform 0.5s ease-in-out`;
-    }, 10);
+  if (current === 1) {
+    returnLast();
   }
-  console.log(current, sliders.length);
   current--;
   sliderContainer.style.transform = `translateX(-${current * 100}vw)`;
+}
+
+function retrunFirst() {
+  current = -1;
+  sliderContainer.style.transition = `none`;
+  sliderContainer.style.transform = `translateX(0)`;
+  setTimeout(() => {
+    sliderContainer.style.transition = `transform 0.5s ease-in-out`;
+    current++;
+    sliderContainer.style.transform = `translateX(-${current * 100}vw)`;
+  }, 10);
+}
+
+function returnLast() {
+  current = sliders().length;
+  sliderContainer.style.transition = `none`;
+  sliderContainer.style.transform = `translateX(-${current * 100})vw`;
+  setTimeout(() => {
+    sliderContainer.style.transition = `transform 0.5s ease-in-out`;
+    current--;
+    sliderContainer.style.transform = `translateX(-${current * 100}vw)`;
+  }, 10);
 }
 
 // function load() {
