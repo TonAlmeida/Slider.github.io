@@ -16,8 +16,17 @@ previous.addEventListener(`click`, previousSlide);
 
 //functions
 function start() {
+  //positioning
   sliderContainer.style.tranform = `translateX(-${current * 100}vw)`;
-  console.log(`adding new sliders`);
+
+  //add images
+  sliderContainer.querySelectorAll(".img").forEach((item, index) => {
+    item.style.backgroundImage = `url(images/${index}.jpg)`;
+    item.style.backgroundSize = `cover`;
+    item.style.backgroundPosition = `center`;
+  });
+
+  //adding ilusions
   const first = sliderContainer.firstElementChild.cloneNode(true);
   const last = sliderContainer.lastElementChild.cloneNode(true);
   sliderContainer.insertBefore(last, sliderContainer.firstChild);
