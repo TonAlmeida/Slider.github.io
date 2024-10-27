@@ -1,103 +1,46 @@
 const sliderContainer = document.getElementById(`slider-container`),
-     next = document.getElementById(`next`),
-     previous = document.getElementById(`previus`),
-     width = sliderContainer.offsetWidth,
-     smallerSpan1 = document.getElementById(`1`),
-     smallerSpan2 = document.getElementById(`2`),
-     smallerSpan3 = document.getElementById(`3`),
-     smallerSpan4 = document.getElementById(`4`),
-     smallerSpan5 = document.getElementById(`5`),
-     smallerSpan6 = document.getElementById(`6`),
-     SpanAll = document.querySelectorAll(`.smaller-slider`);
-
-const spanContainer = {
-    
-    1: smallerSpan1.addEventListener(`click`, e => {
-        sliderContainer.scrollLeft = 0;
-
-        reload();
-    }),
-    2: smallerSpan2.addEventListener(`click`, e => {
-        sliderContainer.scrollLeft = width * 1;
-
-        reload();
-    }),
-    3: smallerSpan3.addEventListener(`click`, e => {
-        sliderContainer.scrollLeft = width * 2;
-
-        reload();
-    }),
-    4: smallerSpan4.addEventListener(`click`, e => {
-        sliderContainer.scrollLeft = width * 3;
-
-        reload();
-    }),
-    5: smallerSpan5.addEventListener(`click`, e => {
-        sliderContainer.scrollLeft = width * 4;
-
-        reload();
-    }),
-    6: smallerSpan6.addEventListener(`click`, e => {
-        sliderContainer.scrollLeft = width * 5;
-
-        reload();
-    }),
-}
+  next = document.getElementById(`next`),
+  previous = document.getElementById(`previus`),
+  sliders = sliderContainer.querySelectorAll(".larger-slider");
+let current = 0;
 
 next.addEventListener(`click`, nextSlide);
 previous.addEventListener(`click`, previousSlide);
 
 function nextSlide() {
-        if(sliderContainer.scrollLeft >= (width * (SpanAll.length-1))) {
-            sliderContainer.scrollLeft = 0;
-            reload();
-        } else {
-            sliderContainer.scrollLeft += width;
-            reload();
-        };
- }
+  if (current === sliders.length - 1) {
+    console.log(`into if condition of end`);
+    current = -1;
+    sliderContainer.style.transition = `none`;
+    sliderContainer.style.transform = `translateX(0)`;
+    setTimeout(() => {
+      sliderContainer.style.transition = `transform 0.5s ease-in-out`;
+    }, 10);
+  }
+  console.log(`next`, current, sliders.length);
+  current++;
+  sliderContainer.style.transform = `translateX(-${current * 100}vw)`;
+}
 
 function previousSlide() {
-    if(sliderContainer.scrollLeft == 0) {
-        sliderContainer.scrollLeft = (width * (SpanAll.length-1));
-        reload();
-    } else {
-        sliderContainer.scrollLeft -= width;
-        reload();
-    };
+  if (current === 0) {
+    current = sliders.length;
+    sliderContainer.style.transition = `none`;
+    sliderContainer.style.transform = `translateX(-${current * 100}vw)`;
+    setTimeout(() => {
+      sliderContainer.style.transition = `transform 0.5s ease-in-out`;
+    }, 10);
+  }
+  console.log(current, sliders.length);
+  current--;
+  sliderContainer.style.transform = `translateX(-${current * 100}vw)`;
 }
 
-function load() {
-    let time = 3500;
-    setInterval(() => {
-        nextSlide();
-    }, time)
-};
+// function load() {
+//   let time = 3500;
+//   setInterval(() => {
+//     nextSlide();
+//   }, time);
+// }
 
-function reload() {
-    const selected = document.querySelector(`.selected`);
-    selected.classList.remove(`selected`);
-    switch(sliderContainer.scrollLeft) {
-        case 0:
-            SpanAll[0].classList.add(`selected`);
-            break;
-        case 1366: 
-            SpanAll[1].classList.add(`selected`);
-            break;
-        case 2732:
-            SpanAll[2].classList.add(`selected`);
-            break;
-        case 4098:
-            SpanAll[3].classList.add(`selected`);
-            break;
-        case 5464:
-            SpanAll[4].classList.add(`selected`);
-            break;
-        case 6830:
-            SpanAll[5].classList.add(`selected`);
-            break;
-    }
-}
-
-
-window.addEventListener(`load`, load);
+// window.addEventListener(`load`, load);
