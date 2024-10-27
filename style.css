@@ -11,6 +11,7 @@ body {
   width: 100vw;
   background-color: blue;
   position: relative;
+  overflow: hidden;
 }
 #slider-container {
   height: inherit;
@@ -20,6 +21,9 @@ body {
   align-items: center;
   justify-content: space-around;
   transition: transform 0.5s ease-in-out;
+
+  font-size: 70px;
+  color: white;
 }
 .larger-slider {
   width: 100vw;
