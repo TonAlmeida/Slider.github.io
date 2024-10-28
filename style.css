@@ -43,14 +43,21 @@ body {
   position: absolute;
   z-index: 99;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
+  background-color: transparent;
+  color: white;
+  font-size: 25px;
   width: 50px;
   height: 50px;
   top: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+}
+#next:hover,
+#previus:hover {
+  transform: scale(2);
+  transition: 0.5s;
 }
 #next {
   right: 20px;
